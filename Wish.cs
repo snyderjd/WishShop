@@ -2,11 +2,11 @@ using System;
 
 namespace WishShop
 {
-    public class Wish
+    public class Wish : Object
     {
         public string Text { get; }
-        public int Price { get; }
-        private int _successPercentage = 90;
+        public int Price { get; protected set; }
+        protected int _successPercentage = 90;
 
         public Wish(string text)
         {
@@ -14,7 +14,12 @@ namespace WishShop
             Price = 10_000;
         }
 
-        public bool MakeWish(User user)
+        public override string ToString()
+        {
+            return $"The wish is {Text}. It costs {Price}";
+        }
+
+        public virtual bool MakeWish(User user)
         {
             if (user.Money < Price)
             {
